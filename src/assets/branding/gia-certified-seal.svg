@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Certificate placeholder — not an official GIA seal</title>
+  <desc id="desc">Temporary artwork only. This image does not certify any product.</desc>
+  <circle cx="80" cy="80" r="70" fill="none" stroke="#D4AF37" stroke-width="2" stroke-dasharray="4 5"/>
+  <path d="M55 43H105L116 59L80 94L44 59ZM44 59H116M65 43L58 59L80 94L102 59L95 43" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linejoin="round"/>
+  <text x="80" y="116" fill="#D4AF37" font-family="sans-serif" font-size="10" text-anchor="middle">PLACEHOLDER</text>
+  <text x="80" y="132" fill="#D4AF37" font-family="sans-serif" font-size="8" text-anchor="middle">NOT A CERTIFICATE</text>
+</svg>

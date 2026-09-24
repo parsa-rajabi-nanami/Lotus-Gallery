@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-labelledby="title desc">
+  <title id="title">Lotus logo placeholder</title>
+  <desc id="desc">Temporary lotus illustration; replace with approved brand artwork.</desc>
+  <g fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 105C85 85 90 48 120 20C150 48 155 85 120 105Z"/>
+    <path d="M120 105C80 110 53 80 52 48C88 50 113 73 120 105Z"/>
+    <path d="M120 105C160 110 187 80 188 48C152 50 127 73 120 105Z"/>
+    <path d="M75 116H165"/>
+  </g>
+  <text x="120" y="142" fill="#D4AF37" font-family="serif" font-size="18" text-anchor="middle" letter-spacing="5">LOTUS</text>
+</svg>

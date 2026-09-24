@@ -1,0 +1,73 @@
+[
+  {
+    "id": "lotus-prod-11433",
+    "sku": "11433",
+    "title_fa": "انگشتر با تخمه یک قیراطی GIA",
+    "title_en": "The 1.00ct GIA Solitaire Crown Ring",
+    "category": "انگشتر جواهر سولیتر",
+    "price_irr": 1500385000,
+    "price_formatted": "۱,۵۰۰,۳۸۵,۰۰۰ تومان",
+    "gold_weight": "۳.۷۲۰ گرم (طلای ۱۸ عیار ۷۵۰)",
+    "primary_stone": "الماس گرد برلیان ۱.۰۰ قیراط، با سرتیفیکیت رسمی GIA",
+    "side_stones": "۷۲ عدد برلیان سفید پاک رده F / VS1",
+    "cut_grade": "Round Brilliant — Triple Excellent (EX)",
+    "color_clarity": "Color G / Clarity VS1",
+    "badges": [
+      "GIA Certified",
+      "Triple Excellent"
+    ],
+    "image_url": "/assets/products/11433/main.jpg",
+    "alt_image_url": "/assets/products/11433/alt.jpg"
+  },
+  {
+    "id": "lotus-prod-11431",
+    "sku": "11431",
+    "title_fa": "انگشتر زمرد کلمبیا با برلیان و باگت",
+    "title_en": "Muzo Colombian Emerald & Diamond Ring",
+    "category": "انگشتر سنگ رنگی",
+    "price_irr": 1373386000,
+    "price_formatted": "۱,۳۷۳,۳۸۶,۰۰۰ تومان",
+    "gold_weight": "۳.۵۰۰ گرم (طلای ۱۸ عیار ۷۵۰)",
+    "primary_stone": "۱ عدد زمرد طبیعی کلمبیا (Muzo) با تراش کلاسیک استپ",
+    "side_stones": "۲ عدد برلیان تراش اشک سفید پاک (رنگ F، پاکی VS1)",
+    "color_clarity": "Vivid Green / Minor Oil",
+    "badges": [
+      "Rare Natural Emerald",
+      "Mastercraft"
+    ],
+    "image_url": "/assets/products/11431/main.jpg"
+  },
+  {
+    "id": "lotus-prod-21180",
+    "sku": "21180",
+    "title_fa": "سرویس تمام برلیان و تخمه جیبسون",
+    "title_en": "Gibson High-Jewelry Diamond Parure",
+    "category": "سرویس فاخر",
+    "price_irr": 2021615000,
+    "price_formatted": "۲,۰۲۱,۶۱۵,۰۰۰ تومان",
+    "gold_weight": "حدود ۳۷.۰۰ گرم (طلای ۱۸ عیار ۷۵۰)",
+    "primary_stone": "۴ عدد تخمه درشت جیبسون با بالاترین ضریب شکست",
+    "side_stones": "۳۴۴ عدد برلیان سفید پاک رده F / VS1",
+    "badges": [
+      "Haute Parure"
+    ],
+    "image_url": "/assets/products/21180/main.jpg"
+  },
+  {
+    "id": "lotus-prod-11894",
+    "sku": "11894",
+    "title_fa": "گوشواره مارکیز و باگت مهندسی‌ساز",
+    "title_en": "Architectural Baguette & Marquise Earrings",
+    "category": "گوشواره جواهر",
+    "price_irr": 1382694000,
+    "price_formatted": "۱,۳۸۲,۶۹۴,۰۰۰ تومان",
+    "gold_weight": "۱۴.۱۵ گرم (طلای ۱۸ عیار ۷۵۰)",
+    "primary_stone": "ترکیب باگت‌های کشیده سوئیسی و برلیان دانه‌ای پاک",
+    "color_clarity": "Top Wesselton / VVS",
+    "badges": [
+      "Exclusive Design",
+      "Master Craft"
+    ],
+    "image_url": "/assets/products/11894/main.jpg"
+  }
+]

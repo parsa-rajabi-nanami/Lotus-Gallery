@@ -1,0 +1,52 @@
+[
+  {
+    "sku": "11433",
+    "field": "image_url",
+    "source_url": "https://lotusgallery.co/wp-content/uploads/2026/05/IMG_5733.jpeg",
+    "resolved_url": "https://lotusgallery.co/wp-content/uploads/2026/05/IMG_5733.jpeg",
+    "local_url": "/assets/products/11433/main.jpg",
+    "bytes": 195401,
+    "sha256": "d646389032751a344d8da73391f1a776d653e3b5ea0a0c6918a80ecb6ebd8c0b",
+    "file_type": "JPEG image data, JFIF standard 1.01, aspect ratio, density 144x144, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=7, description=Screenshot, orientation=upper-left, xresolution=110, yresolution=118, resolutionunit=2, datetime=2026:05:30 22:47:13], baseline, precision 8, 1320x1622, components 3"
+  },
+  {
+    "sku": "11433",
+    "field": "alt_image_url",
+    "source_url": "https://lotusgallery.co/wp-content/uploads/2024/06/F396CD45-550E-4844-8A2F-FDF6AD4C9D22-min.jpeg",
+    "resolved_url": "https://lotusgallery.co/wp-content/uploads/2024/06/F396CD45-550E-4844-8A2F-FDF6AD4C9D22-min.jpeg",
+    "local_url": "/assets/products/11433/alt.jpg",
+    "bytes": 298966,
+    "sha256": "bb7ff4cea69bde1d48e765ab132c811d9b41e113974f516ab5bca9515716f180",
+    "file_type": "JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, progressive, precision 8, 1284x1588, components 3"
+  },
+  {
+    "sku": "11431",
+    "field": "image_url",
+    "source_url": "https://lotusgallery.co/wp-content/uploads/2026/05/IMG_5697.jpeg",
+    "resolved_url": "https://lotusgallery.co/wp-content/uploads/2026/05/IMG_5697.jpeg",
+    "local_url": "/assets/products/11431/main.jpg",
+    "bytes": 143500,
+    "sha256": "682b072ffb451884e581819f54a67ba973a48f4e47e00933692117b13924ca6b",
+    "file_type": "JPEG image data, JFIF standard 1.01, aspect ratio, density 144x144, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=7, description=Screenshot, orientation=upper-left, xresolution=110, yresolution=118, resolutionunit=2, datetime=2026:05:29 23:01:40], baseline, precision 8, 1320x1626, components 3"
+  },
+  {
+    "sku": "21180",
+    "field": "image_url",
+    "source_url": "https://lotusgallery.co/wp-content/uploads/2026/05/IMG_5593.jpeg",
+    "resolved_url": "https://lotusgallery.co/wp-content/uploads/2026/05/IMG_5593.jpeg",
+    "local_url": "/assets/products/21180/main.jpg",
+    "bytes": 296128,
+    "sha256": "5d7e649b283ce8f75538e0df85e024df8fd2ec147486f8e891f0a5854f560c75",
+    "file_type": "JPEG image data, JFIF standard 1.01, aspect ratio, density 144x144, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=7, description=Screenshot, orientation=upper-left, xresolution=110, yresolution=118, resolutionunit=2, datetime=2026:05:18 20:20:34], baseline, precision 8, 1320x1625, components 3"
+  },
+  {
+    "sku": "11894",
+    "field": "image_url",
+    "source_url": "https://lotusgallery.co/wp-content/uploads/2026/09/IMG_7023.jpeg",
+    "resolved_url": "https://lotusgallery.co/wp-content/uploads/2026/09/IMG_7023.jpeg",
+    "local_url": "/assets/products/11894/main.jpg",
+    "bytes": 368365,
+    "sha256": "82b2deed0900d25867215025a0d5c69b83821a3c2a1add55135a2331bf4374de",
+    "file_type": "JPEG image data, JFIF standard 1.01, aspect ratio, density 144x144, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=7, description=Screenshot, orientation=upper-left, xresolution=110, yresolution=118, resolutionunit=2, datetime=2026:09:05 19:27:46], baseline, precision 8, 1320x1566, components 3"
+  }
+]
