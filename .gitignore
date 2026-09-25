@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Ai
+.playwright-mcp/
+.codex/
+.agents/
