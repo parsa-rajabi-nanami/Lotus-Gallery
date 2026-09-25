@@ -15,3 +15,99 @@
 .ticker-viewport { overflow: hidden; }
 .ticker-track { animation: ticker-scroll 35s linear infinite !important; transform: translate3d(0, 0, 0); will-change: transform; }
 @keyframes ticker-scroll { to { transform: translate3d(-25%, 0, 0); } }
+
+/* Header navigation: restrained corner reveal keeps the luxury palette intact. */
+.main-nav a {
+  position: relative;
+  padding: 7px 9px;
+  transition: color .3s ease;
+}
+
+.main-nav a::before,
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  opacity: .9;
+  pointer-events: none;
+  transition: width .3s ease, height .3s ease, border-color .3s ease;
+}
+
+.main-nav a::after {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.main-nav a::before {
+  right: 0;
+  bottom: 0;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  color: #f3e5ab;
+}
+
+.main-nav a:hover::before,
+.main-nav a:hover::after,
+.main-nav a:focus-visible::before,
+.main-nav a:focus-visible::after {
+  width: 10px;
+  height: 10px;
+  border-color: #d4af37;
+}
+
+@media (max-width: 800px) {
+  .main-nav {
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px) scaleY(.96);
+    transform-origin: top center;
+    transition: opacity .28s ease, transform .28s ease, visibility 0s linear .28s;
+  }
+
+  .main-nav.open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scaleY(1);
+    transition-delay: 0s;
+  }
+
+  .main-nav a {
+    padding: 14px 20px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: color .3s ease, opacity .24s ease, transform .24s ease;
+  }
+
+  .main-nav.open a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .main-nav.open a:nth-child(1) { transition-delay: .04s; }
+  .main-nav.open a:nth-child(2) { transition-delay: .08s; }
+  .main-nav.open a:nth-child(3) { transition-delay: .12s; }
+  .main-nav.open a:nth-child(4) { transition-delay: .16s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-nav,
+  .main-nav.open,
+  .main-nav a,
+  .main-nav.open a,
+  .main-nav a::before,
+  .main-nav a::after {
+    transition: none;
+    transform: none;
+  }
+}
