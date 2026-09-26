@@ -286,31 +286,72 @@
 
 .hero {
   position: relative;
-  min-height: 840px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 150px max(32px, calc((100vw - 1180px)/2)) 100px;
+  padding: clamp(120px, 12vw, 170px) max(32px, calc((100vw - 1180px)/2)) 100px;
   isolation: isolate;
+  perspective: 1200px;
+  background: #0a0a0a;
 }
 
-.hero-image {
+.hero-stage {
   position: absolute;
   z-index: -2;
-  inset: 0 0 0 25%;
-  background-position: center;
-  background-size: cover;
+  inset: 0;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-stage-inner,
+.hero-fallback,
+.hero-canvas,
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-stage-inner {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.hero-fallback,
+.hero-canvas {
+  object-fit: cover;
+}
+
+.hero-fallback {
   filter: saturate(.75) contrast(1.05);
 }
 
-.hero-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #0a0a0a 0%, #0a0a0acc 28%, #0a0a0a29 80%, #0a0a0a 100%), linear-gradient(0deg, #0a0a0a 0%, transparent 28%, #0a0a0a40 100%);
+.hero-canvas {
+  opacity: 0;
+  transition: opacity .45s ease;
+  filter: saturate(.75) contrast(1.05);
+}
+
+.hero-canvas.is-ready {
+  opacity: 1;
+}
+
+.hero-atmosphere {
+  pointer-events: none;
+  background: linear-gradient(90deg, #0a0a0a 0%, #0a0a0acc 28%, #0a0a0a29 80%, #0a0a0a 100%), linear-gradient(0deg, #0a0a0a 0%, transparent 28%, #0a0a0a40 100%), radial-gradient(circle at 68% 44%, transparent 20%, #0a0a0a55 100%);
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
   width: 540px;
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 .hero h1,
@@ -359,6 +400,7 @@
 
 .hero-caption {
   position: absolute;
+  z-index: 2;
   left: max(32px, calc((100vw - 1320px)/2));
   bottom: 88px;
   display: flex;
@@ -954,18 +996,9 @@
   }
 
   .hero {
-    min-height: 730px;
+    aspect-ratio: 808 / 1438;
     padding: 150px 20px 90px;
     align-items: end;
-  }
-
-  .hero-image {
-    inset: 0;
-    background-position: 63% center;
-  }
-
-  .hero-image::after {
-    background: linear-gradient(0deg, #0a0a0a, #0a0a0a8c 48%, #0a0a0a33);
   }
 
   .hero-content {
@@ -983,6 +1016,10 @@
   .hero-caption {
     left: 20px;
     bottom: 34px;
+  }
+
+  .hero-atmosphere {
+    background: linear-gradient(0deg, #0a0a0a, #0a0a0a8c 48%, #0a0a0a33), radial-gradient(circle at 50% 38%, transparent 16%, #0a0a0a55 100%);
   }
 
   .section-pad {
@@ -1135,6 +1172,9 @@
   }
 
   .ticker-track,
+  .hero-canvas,
+  .hero-stage,
+  .hero-stage-inner,
   .product-media img,
   .outline-button,
   .gold-button,

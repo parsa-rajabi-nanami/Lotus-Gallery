@@ -44,7 +44,7 @@ export function usePageMotion() {
 
     const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } })
     heroTimeline
-      .fromTo('.hero-image', { autoAlpha: 0, scale: 1.08 }, { autoAlpha: 1, scale: 1, duration: 1.5 }, 0)
+      .fromTo('.hero-stage-inner', { autoAlpha: 0, scale: 1.08 }, { autoAlpha: 1, scale: 1, duration: 1.5 }, 0)
       .fromTo(hero, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .95, stagger: .1 }, .18)
       .fromTo('.hero-caption', { autoAlpha: 0, x: -18 }, { autoAlpha: 1, x: 0, duration: .7 }, .58)
 
