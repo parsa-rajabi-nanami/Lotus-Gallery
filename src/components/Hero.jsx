@@ -8,7 +8,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const FRAME_COUNT = 120
 const PRIORITY_FRAMES = 15
-const HERO_SCROLL_DISTANCE = '+=350vh'
+const HERO_SCROLL_DISTANCE = '+=1550vh'
 const cache = { desktop: new Map(), mobile: new Map() }
 const pending = { desktop: new Map(), mobile: new Map() }
 

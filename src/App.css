@@ -28,9 +28,8 @@
 
 .site-header {
   position: sticky;
-  top: 14px;
+  top: 48px;
   z-index: 20;
-  margin-top: 48px;
 }
 
 .nav-shell {
@@ -137,7 +136,7 @@
 }
 
 .ticker {
-  position: absolute;
+  position: sticky;
   top: 0;
   z-index: 12;
   width: 100%;
@@ -954,8 +953,7 @@
   }
 
   .site-header {
-    top: 10px;
-    margin-top: 44px;
+    top: 44px;
   }
 
   .nav-shell {
