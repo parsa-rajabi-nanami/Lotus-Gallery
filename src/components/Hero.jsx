@@ -8,6 +8,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const FRAME_COUNT = 120
 const PRIORITY_FRAMES = 15
+const HERO_SCROLL_DISTANCE = '+=350vh'
 const cache = { desktop: new Map(), mobile: new Map() }
 const pending = { desktop: new Map(), mobile: new Map() }
 
@@ -163,9 +164,10 @@ export default function Hero() {
     const frameTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: hero,
-        start: 'top top',
-        end: '+=450vh',
+        start: 0,
+        end: HERO_SCROLL_DISTANCE,
         pin: true,
+        pinSpacing: true,
         scrub: 1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -207,7 +209,6 @@ export default function Hero() {
       <div className="hero-stage-inner">
         <img className="hero-fallback" src={fallbackSrc} alt="" aria-hidden="true" />
         <canvas className="hero-canvas" ref={canvasRef} aria-label="نمایش سینمایی کالکشن لوتوس" />
-        <div className="hero-atmosphere" aria-hidden="true" />
       </div>
     </div>
     <div className="hero-content"><p className="eyebrow" data-reveal="hero">LOTUS / HIGH JEWELRY</p><h1 data-reveal="hero">تجلی زیبایی در<br /><em>شاهکارهای ماندگار</em></h1><p className="hero-copy" data-reveal="hero">انتخابی برای کسانی که ارزش را فراتر از زمان می‌بینند؛ مجموعه‌ای از جواهرات فاخر با روایت، اصالت و جزئیات بی‌نقص.</p><div className="hero-actions" data-reveal="hero"><a className="gold-button" href="#flagships">مشاهده کالکشن <Icon name="arrow" size={16} /></a><a className="text-link" href="#concierge">بازدید حضوری <span>↗</span></a></div></div><div className="hero-caption"><b className="en-text">THE CROWN RING</b><span>انگشتر تخمه یک قیراطی GIA</span></div>
