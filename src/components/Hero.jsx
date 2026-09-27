@@ -47,10 +47,18 @@ function findLoadedFrame(mode, index) {
 }
 
 function drawCover(context, image, width, height) {
+  // الگوریتم دقیق Cover: محاسبه مقیاس بر اساس بزرگترین نسبت برای پوشش کامل و کراپ کردن اضافات
   const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight)
-  const drawWidth = image.naturalWidth * scale
-  const drawHeight = image.naturalHeight * scale
-  context.drawImage(image, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight)
+  
+  // استفاده از Math.ceil برای جلوگیری از باگ رندرینگ ساب‌پیکسل و پر کردن قطعی لبه‌ها
+  const drawWidth = Math.ceil(image.naturalWidth * scale)
+  const drawHeight = Math.ceil(image.naturalHeight * scale)
+  
+  // استفاده از Math.round برای مختصات دهی دقیق و مرکزی
+  const x = Math.round((width - drawWidth) / 2)
+  const y = Math.round((height - drawHeight) / 2)
+  
+  context.drawImage(image, x, y, drawWidth, drawHeight)
 }
 
 export default function Hero() {
@@ -60,7 +68,10 @@ export default function Hero() {
   const frameRef = useRef(0)
   const frameState = useRef({ frame: 0 })
   const requestFrameRef = useRef(() => {})
-  const [mode, setMode] = useState(() => (window.matchMedia('(max-width: 768px)').matches ? 'mobile' : 'desktop'))
+  
+  const [mode, setMode] = useState(() => 
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches ? 'mobile' : 'desktop'
+  )
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 768px)')
@@ -75,22 +86,23 @@ export default function Hero() {
     if (!canvas || !stage) return undefined
 
     const context = canvas.getContext('2d', { alpha: false })
-    const ratio = mode === 'mobile' ? 808 / 1438 : 16 / 9
     let animationFrame = 0
     let cancelled = false
-    let idleHandle = null
+    let timerId = null
+    let isIdleCallback = false
     let nextBackgroundFrame = PRIORITY_FRAMES
 
-    stage.style.aspectRatio = `${ratio}`
-
+    // حذف Aspect Ratio تحمیلی؛ استفاده از ابعاد واقعی برای جلوگیری از بیرون‌زدگی محتوا
     const resize = () => {
+      // استفاده از clientHeight و clientWidth کانتینر
       const width = stage.clientWidth || window.innerWidth
-      const height = width / ratio
+      const height = stage.clientHeight || window.innerHeight 
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
-      canvas.style.aspectRatio = `${ratio}`
       context.setTransform(dpr, 0, 0, dpr, 0, 0)
+      
       const image = findLoadedFrame(mode, frameRef.current)
       if (image) drawCover(context, image, width, height)
     }
@@ -99,9 +111,11 @@ export default function Hero() {
       const image = findLoadedFrame(mode, index)
       if (!image) return
       frameRef.current = index
+      
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       const width = canvas.width / dpr
       const height = canvas.height / dpr
+      
       context.clearRect(0, 0, width, height)
       drawCover(context, image, width, height)
       canvas.classList.add('is-ready')
@@ -120,14 +134,21 @@ export default function Hero() {
       if (cancelled) return
       const indexes = Array.from({ length: 8 }, (_, offset) => nextBackgroundFrame + offset)
         .filter((index) => index < FRAME_COUNT)
+        
       if (!indexes.length) return
       nextBackgroundFrame += indexes.length
+      
       Promise.all(indexes.map((index) => loadFrame(mode, index).catch(() => null))).then(() => {
         if (!cancelled) scheduleDraw()
       })
-      idleHandle = 'requestIdleCallback' in window
-        ? window.requestIdleCallback(loadBackgroundChunk, { timeout: 800 })
-        : window.setTimeout(loadBackgroundChunk, 80)
+      
+      if ('requestIdleCallback' in window) {
+        isIdleCallback = true
+        timerId = window.requestIdleCallback(loadBackgroundChunk, { timeout: 800 })
+      } else {
+        isIdleCallback = false
+        timerId = window.setTimeout(loadBackgroundChunk, 80)
+      }
     }
 
     const observer = new ResizeObserver(resize)
@@ -148,9 +169,14 @@ export default function Hero() {
       observer.disconnect()
       if (animationFrame) window.cancelAnimationFrame(animationFrame)
       requestFrameRef.current = () => {}
-      if (idleHandle !== null) {
-        if (typeof idleHandle === 'number' && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleHandle)
-        else window.clearTimeout(idleHandle)
+      
+      // دیباگ پاکسازی مطمئن مموری برای تایمرها
+      if (timerId !== null) {
+        if (isIdleCallback && 'cancelIdleCallback' in window) {
+          window.cancelIdleCallback(timerId)
+        } else {
+          window.clearTimeout(timerId)
+        }
       }
     }
   }, [mode])
@@ -164,11 +190,11 @@ export default function Hero() {
     const frameTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: hero,
-        start: 0,
+        start: 0, 
         end: HERO_SCROLL_DISTANCE,
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        scrub: 1.2, 
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
@@ -180,18 +206,26 @@ export default function Hero() {
       ease: 'none',
       onUpdate: () => requestFrameRef.current(),
     })
-    frameTimeline.to('.hero-content', { y: -80, z: 40, autoAlpha: 0, scale: .94, duration: .24 }, 0)
-    frameTimeline.to('.hero-caption', { y: 34, z: 20, autoAlpha: 0, duration: .2 }, .16)
 
-    const xTo = gsap.quickTo(stage, 'rotationY', { duration: .7, ease: 'power3.out' })
-    const yTo = gsap.quickTo(stage, 'rotationX', { duration: .7, ease: 'power3.out' })
+    // دیباگ رفع مشکل باکس شیشه‌ای: همیشه خود کانتینر اصلی محو می‌شود
+    frameTimeline.to('.hero-content', { 
+      y: -60, 
+      autoAlpha: 0, 
+      scale: 0.96, 
+      duration: 0.25,
+      force3D: true
+    }, 0)
+
+    const xTo = gsap.quickTo(stage, 'rotationY', { duration: 0.8, ease: 'power3.out' })
+    const yTo = gsap.quickTo(stage, 'rotationX', { duration: 0.8, ease: 'power3.out' })
     const resetTilt = () => { xTo(0); yTo(0) }
+    
     const onPointerMove = (event) => {
       const bounds = stage.getBoundingClientRect()
-      const x = ((event.clientX - bounds.left) / bounds.width - .5) * 2
-      const y = ((event.clientY - bounds.top) / bounds.height - .5) * 2
-      xTo(x * 4)
-      yTo(y * -4)
+      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2
+      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2
+      xTo(x * 3)
+      yTo(y * -3)
     }
 
     stage.addEventListener('pointermove', onPointerMove, { passive: true })
@@ -204,13 +238,27 @@ export default function Hero() {
 
   const fallbackSrc = getFrameUrl(mode, 0)
 
-  return <section className="hero" id="top" ref={heroRef}>
-    <div className="hero-stage" ref={stageRef}>
-      <div className="hero-stage-inner">
-        <img className="hero-fallback" src={fallbackSrc} alt="" aria-hidden="true" />
-        <canvas className="hero-canvas" ref={canvasRef} aria-label="نمایش سینمایی کالکشن لوتوس" />
+  return (
+    <section className="hero" id="top" ref={heroRef}>
+      <div className="hero-stage" ref={stageRef}>
+        <div className="hero-stage-inner">
+          <img className="hero-fallback" src={fallbackSrc} alt="" aria-hidden="true" />
+          <canvas className="hero-canvas" ref={canvasRef} aria-label="نمایش سینمایی کالکشن لوتوس" />
+        </div>
       </div>
-    </div>
-    <div className="hero-content"><p className="eyebrow" data-reveal="hero">LOTUS / HIGH JEWELRY</p><h1 data-reveal="hero">تجلی زیبایی در<br /><em>شاهکارهای ماندگار</em></h1><p className="hero-copy" data-reveal="hero">انتخابی برای کسانی که ارزش را فراتر از زمان می‌بینند؛ مجموعه‌ای از جواهرات فاخر با روایت، اصالت و جزئیات بی‌نقص.</p><div className="hero-actions" data-reveal="hero"><a className="gold-button" href="#flagships">مشاهده کالکشن <Icon name="arrow" size={16} /></a><a className="text-link" href="#concierge">بازدید حضوری <span>↗</span></a></div></div><div className="hero-caption"><b className="en-text">THE CROWN RING</b><span>انگشتر تخمه یک قیراطی GIA</span></div>
-  </section>
+      <div className="hero-content" dir="rtl">
+        <div className="hero-hud hero-hud-top">
+          <p className="eyebrow" data-reveal="hero">LOTUS / HIGH JEWELRY</p>
+          <h1 data-reveal="hero">تجلی زیبایی در<br /><em>شاهکارهای ماندگار</em></h1>
+        </div>
+        <div className="hero-hud hero-hud-bottom">
+          <p className="hero-copy" data-reveal="hero">انتخابی برای کسانی که ارزش را فراتر از زمان می‌بینند؛ مجموعه‌ای از جواهرات فاخر با اصالت و جزئیات بی‌نقص.</p>
+          <div className="hero-actions" data-reveal="hero">
+            <a className="gold-button" href="#flagships">مشاهده کالکشن <Icon name="arrow" size={16} /></a>
+            <a className="hero-visit-link" href="#concierge">بازدید حضوری <span>↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }
