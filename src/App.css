@@ -167,7 +167,7 @@
   height: 0;
   border: 0 solid transparent;
   opacity: .9;
-  pointer-events: none;
+  pointer-events: auto;
   transition: width .3s ease, height .3s ease, border-color .3s ease;
 }
 
@@ -637,8 +637,37 @@
 
 /* Benefits */
 .benefits {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: #0d0d0d;
   border-block: 1px solid #202020;
+}
+
+.benefits-terrain {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  opacity: .34;
+  pointer-events: auto;
+}
+
+.benefits-terrain > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.wire-terrain,
+.wire-terrain canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.benefits-content {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .benefit-grid {
@@ -646,6 +675,7 @@
   grid-template-columns: repeat(4, 1fr);
   margin-top: 85px;
   border-top: 1px solid #292929;
+  background: #0d0d0d99;
 }
 
 .benefit {
