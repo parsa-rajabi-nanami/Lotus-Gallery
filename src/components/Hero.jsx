@@ -47,16 +47,11 @@ function findLoadedFrame(mode, index) {
 }
 
 function drawCover(context, image, width, height) {
-  // الگوریتم دقیق Cover: محاسبه مقیاس بر اساس بزرگترین نسبت برای پوشش کامل و کراپ کردن اضافات
   const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight)
-  
-  // استفاده از Math.ceil برای جلوگیری از باگ رندرینگ ساب‌پیکسل و پر کردن قطعی لبه‌ها
   const drawWidth = Math.ceil(image.naturalWidth * scale)
   const drawHeight = Math.ceil(image.naturalHeight * scale)
-  
-  // استفاده از Math.round برای مختصات دهی دقیق و مرکزی
   const x = Math.round((width - drawWidth) / 2)
-  const y = Math.round((height - drawHeight) / 2)
+  const y = 0
   
   context.drawImage(image, x, y, drawWidth, drawHeight)
 }

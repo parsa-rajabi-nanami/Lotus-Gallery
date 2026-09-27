@@ -78,6 +78,7 @@
   border: 1px solid #d4af37;
   color: #0a0a0a;
   background: #d4af37;
+  border-radius: 12px;
 }
 
 .gold-button:hover {
@@ -90,8 +91,10 @@
    Site Header & Navigation
    ========================================================================== */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 48px;
+  left: 0;
+  width: 100%;
   z-index: 20;
 }
 
@@ -258,7 +261,8 @@
    Ticker
    ========================================================================== */
 .ticker {
-  position: sticky;
+  position: fixed;
+  left: 0;
   top: 0;
   z-index: 12;
   width: 100%;
@@ -421,12 +425,11 @@
 .hero {
   position: relative;
   width: 100%;
-  /* استفاده از vh به عنوان فال‌بک و dvh برای پر کردن داینامیک کل ارتفاع سیستم کاربر */
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: clamp(120px, 12vh, 170px) max(32px, calc((100vw - 1180px) / 2)) 100px;
   isolation: isolate;
   perspective: 1200px;
@@ -574,7 +577,7 @@
   }
 
   .hero-hud-top {
-    top: 128px;
+    top: 10rem;
     right: max(32px, calc((100vw - 1180px) / 2));
     width: min(470px, 38vw);
   }
@@ -1278,10 +1281,9 @@
     transform: none;
   }
 
-  /* مدیریت حرفه ای فاصله در موبایل و جلوگیری از بیرون‌زدگی */
   .hero {
     height: 100vh;
-    height: 100svh;
+    height: 100dvh;
     padding: 0 20px 20px;
     display: flex;
     flex-direction: column;
@@ -1302,7 +1304,6 @@
     width: 100%;
     /* اگر صفحه به شدت کوتاه بود، ارتفاع را محدود کرده و اسکرول داخلی می‌دهد */
     max-height: calc(100svh - 100px);
-    overflow-y: auto;
     flex: 0 0 auto;
     padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
     border-radius: 18px;
@@ -1473,7 +1474,6 @@
   .hero-content {
     /* جلوگیری از بیرون زدن باکس محتوا از صفحه با ایجاد اسکرول داخلی در صورت نیاز */
     max-height: calc(100dvh - 140px);
-    overflow-y: auto;
   }
 
   .hero h1 {
